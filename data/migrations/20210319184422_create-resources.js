@@ -34,8 +34,21 @@ exports.up = function (knex) {
         .onUpdate('RESTRICT')
     })
 
+    // This is an appointment table
+    // It connects a resource to a project
     .createTable('project_resources', table => {
-      table.increments('project_resource_id')
+      table.increments('resource_assignment_id')
+      table.integer('project_id')
+        .unsigned()
+        .references('project_id')
+        .inTable('projects')
+        .onDelete('RESTRICT')
+
+      table.integer('resource_id')
+        .unsigned()
+        .references('resource_id')
+        .inTable('resources')
+        .onDelete('RESTRICT')
     })
 };
 
