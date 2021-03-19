@@ -17,5 +17,15 @@ router.get('/', (req, res) => {
     })
 })
 
+router.post('/', (req, res) => {
+  Resource.insert(req.body)
+    .then(newResource => {
+      res.status(200).json(newResource)
+    })
+    .catch(err => {
+      res.status(500).json(err)
+    })
+})
+
 // Expose our router to other files
 module.exports = router

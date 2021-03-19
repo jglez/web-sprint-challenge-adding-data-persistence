@@ -5,6 +5,7 @@ const express = require('express')
 const resourcesRouter = require('./resource/router.js')
 
 // Import Project Router
+const projectsRouter = require('./project/router.js')
 
 // Import Task Router
 
@@ -16,6 +17,9 @@ server.use(express.json())
 
 // Use Resources Router
 server.use('/api/resources', resourcesRouter)
+
+// Use Projects Router
+server.use('/api/projects', projectsRouter)
 
 // Expose our server to other files
 module.exports = server
