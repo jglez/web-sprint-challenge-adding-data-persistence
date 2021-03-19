@@ -1,10 +1,15 @@
 // Project Model
+const db = require('../../data/dbConfig.js')
+
 function getAll() {
-  return Promise.resolve([{ "project_id": 1, "project_name": "bar", "project_description": null, "project_completed": false }])
+  return db('projects')
 }
 
-function insert() {
-  return Promise.resolve({ "project_id": 1, "project_name": "bar", "project_description": null, "project_completed": false })
+function insert(project) {
+  return db('projects').insert(project)
+    .then(([id]) => {
+      return db('projects').where('project_id', id)
+    })
 }
 
 module.exports = {
