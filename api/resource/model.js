@@ -2,11 +2,14 @@
 const db = require('../../data/dbConfig.js')
 
 function getAll() {
-  return Promise.resolve([{ "resource_id": 1, "resource_name": "foo", "resource_description": null }])
+  return db('resources')
 }
 
-function insert() {
-  return Promise.resolve({ "resource_id": 1, "resource_name": "foo", "resource_description": null })
+function insert(resource) {
+  return db('resources').insert(resource)
+    .then(([id]) => {
+      return db('resources').where('resource_id', id)
+    })
 }
 
 module.exports = {
