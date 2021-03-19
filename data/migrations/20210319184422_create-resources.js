@@ -7,18 +7,23 @@ exports.up = function (knex) {
     .createTable('projects', table => {
       // Instantiate the primary key
       table.increments('project_id')
+      // Project name is required
+      table.string('project_name').notNullable()
+      table.string('project_description')
+      // Boolean type - default to false/0 
+      table.boolean('project_completed').defaultTo(false)
     })
 
     .createTable('resources', table => {
-
+      table.increments('resource_id')
     })
 
     .createTable('tasks', table => {
-
+      table.increments('task_id')
     })
 
     .createTable('project_resources', table => {
-
+      table.increments('project_resource_id')
     })
 };
 
